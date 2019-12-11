@@ -115,15 +115,35 @@ namespace dark_place_game.tests
         }
         
         public void WithdrawMoreThanCurrentAmountInCurrencyHolderThrowExeption()        {
+            // A vous d'écrire un test qui vérifie que retirer (methode withdraw) une quantité negative de curren            
+            // Astuce : dans ce cas prévu avant même de pouvoir compiler le test, vous allez être obligé de créer
             Action mauvaisAppel = () => {
             var ch = new CurrencyHolder(EXEMPLE_NOM_MONNAIE_VALIDE,250,200);
             ch.Withdraw(-60);
             };
             Assert.Throws<CantWitchDrawMoreThanCurrentAmountExeption>(mauvaisAppel);
-                // A vous d'écrire un test qui vérifie que retirer (methode withdraw) une quantité negative de curren            
-                // Astuce : dans ce cas prévu avant même de pouvoir compiler le test, vous allez être obligé de créer        }         #TODO_ETAPE_4 */ 
- 
-        }     
+        }
+
+        [Fact]         
+        public void CreatingCurrencyHolderWithNameBetween4Than10CharacterThrowExeption() 
+        {
+            //nom de currency entre 4 et 10 caracteres
+            Action mauvaisAppel1 = () => new CurrencyHolder("EU",EXEMPLE_CAPACITE_VALIDE , EXEMPLE_CONTENANCE_INITIALE_VALIDE);
+            Assert.Throws<ArgumentException>(mauvaisAppel1);
+
+            // test pour un nom de 12 caracteres
+            Action mauvaisAppel2 = () => new CurrencyHolder("AZERTYUIOPQS",EXEMPLE_CAPACITE_VALIDE , EXEMPLE_CONTENANCE_INITIALE_VALIDE);
+            Assert.Throws<ArgumentException>(mauvaisAppel2);
+        }
+        [Fact]         
+        public void StoreMoreThanCurrentAmountInCurrencyHolderThrowExeption()        {
+            Action mauvaisAppel = () => {
+            var ch = new CurrencyHolder(EXEMPLE_NOM_MONNAIE_VALIDE,250,200);
+            ch.Withdraw(-20);
+            };
+            Assert.Throws<CantWitchDrawMoreThanCurrentAmountExeption>(mauvaisAppel);          
+                              
+        }  
 
     }
 }

@@ -5,6 +5,9 @@ namespace dark_place_game
 /// Une Exeption Custom
 public class NotEnoughtSpaceInCurrencyHolderExeption : System.Exception {}
 public class CantWitchDrawMoreThanCurrentAmountExeption : Exception{}
+
+public class StoreMoreThanCurrentAmountInCurrencyHolderThrowExeption:System.Exception{}
+
 public class CurrencyHolder
 {
 public static readonly string CURRENCY_DEFAULT_NAME = "Unnamed";
@@ -36,7 +39,7 @@ capacity = value;
 // Le champs interne de la property
 private int capacity = 0;
 public CurrencyHolder(string name,int capacity, int amount) {
-    if(amount<0 || name == null || name == "" || name.Length <4) { 
+    if(amount<0 || name == null || name == "" || name.Length < 4 || name.Length > 10) { 
         throw new System.ArgumentException("Argument invalide");
     }
 Capacity = capacity;
@@ -50,21 +53,25 @@ public bool IsFull() {
 return true;
 }
 
-public void Store(int amount) {
-    var amountCurrent = this.CurrentAmount + amount;
-    if(amountCurrent > this.Capacity){
-        throw new System.ArgumentException("Argument invalide");
-        }
-        this.CurrentAmount += amount;
-    }
- 
-public void Withdraw(int amount) { 
-    var amountCurrent = this.CurrentAmount - amount;
-    if(amount < 0){
-        throw new CantWitchDrawMoreThanCurrentAmountExeption();
+    public void Store(int amount) {
+            var amountCurrent = this.CurrentAmount + amount;
+            if(amount < 0){
+                throw new StoreMoreThanCurrentAmountInCurrencyHolderThrowExeption();
             }
-        this.CurrentAmount -= amount;
-    }
+            if(amountCurrent > this.Capacity || amount <0){
+                throw new System.ArgumentException("Argument invalide");
+            }
+            this.CurrentAmount += amount;
+        }
+ 
+        public void Withdraw(int amount) { 
+             var amountCurrent = this.CurrentAmount - amount;
+            if(amount < 0){
+                throw new CantWitchDrawMoreThanCurrentAmountExeption();
+            }
+            this.CurrentAmount -= amount;
+        }
+
 
 }
 }
