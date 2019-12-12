@@ -39,9 +39,11 @@ capacity = value;
 // Le champs interne de la property
 private int capacity = 0;
 public CurrencyHolder(string name,int capacity, int amount) {
-    if(amount<0 || name == null || name == "" || name.Length < 4 || name.Length > 10) { 
+    if(amount<0 || name == null || name == "" || name.Length < 4 || name.Length > 10 || capacity<1) { 
         throw new System.ArgumentException("Argument invalide");
     }
+    if (name[0]=='h' || name[0]=='H')
+     throw new System.ArgumentException("Argument invalide");
 Capacity = capacity;
 CurrencyName = name;
 CurrentAmount = amount;

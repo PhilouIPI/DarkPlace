@@ -105,11 +105,10 @@ namespace dark_place_game.tests
             Assert.Throws<ArgumentException>(mauvaisAppel);
         }
 
-
         [Fact]
         public void CreatingCurrencyHolderWithNameShorterThan4CharacterThrowExeption()
         {
-            // A vous d'écrire un test qui doit échouer s'il es possible de créer un CurrencyHolder dont Le Nom De monnaie est inférieur a 4 lettres
+            // A vous d'écrire un test qui doit échouer s'il est possible de créer un CurrencyHolder dont Le Nom De monnaie est inférieur a 4 lettres
             Action mauvaisAppel = () => new CurrencyHolder("EU", EXEMPLE_CAPACITE_VALIDE , EXEMPLE_CONTENANCE_INITIALE_VALIDE);
             Assert.Throws<ArgumentException>(mauvaisAppel);
         }
@@ -127,23 +126,52 @@ namespace dark_place_game.tests
         [Fact]         
         public void CreatingCurrencyHolderWithNameBetween4Than10CharacterThrowExeption() 
         {
-            //nom de currency entre 4 et 10 caracteres
-            Action mauvaisAppel1 = () => new CurrencyHolder("EU",EXEMPLE_CAPACITE_VALIDE , EXEMPLE_CONTENANCE_INITIALE_VALIDE);
+            //test pour un nom de currency entre 4 et 10 caracteres
+            Action mauvaisAppel1 = () => new CurrencyHolder("EU",EXEMPLE_CAPACITE_VALIDE,EXEMPLE_CONTENANCE_INITIALE_VALIDE);
             Assert.Throws<ArgumentException>(mauvaisAppel1);
 
             // test pour un nom de 12 caracteres
-            Action mauvaisAppel2 = () => new CurrencyHolder("AZERTYUIOPQS",EXEMPLE_CAPACITE_VALIDE , EXEMPLE_CONTENANCE_INITIALE_VALIDE);
+            Action mauvaisAppel2 = () => new CurrencyHolder("AZERTYUIOPQS",EXEMPLE_CAPACITE_VALIDE,EXEMPLE_CONTENANCE_INITIALE_VALIDE);
             Assert.Throws<ArgumentException>(mauvaisAppel2);
         }
+
         [Fact]         
         public void StoreMoreThanCurrentAmountInCurrencyHolderThrowExeption()        {
+            //test pour ne peux pas mettre des currency dans un CurrencyHolder si ca le fait depasser sa capacité
             Action mauvaisAppel = () => {
             var ch = new CurrencyHolder(EXEMPLE_NOM_MONNAIE_VALIDE,250,200);
             ch.Withdraw(-20);
             };
-            Assert.Throws<CantWitchDrawMoreThanCurrentAmountExeption>(mauvaisAppel);          
-                              
+            Assert.Throws<CantWitchDrawMoreThanCurrentAmountExeption>(mauvaisAppel);       
+                          
         }  
+        
+        [Fact]         
+        public void CantCreateCurrencyHolderWithHThrowExeption()        {
+            //test pour nom de currency ne commencant pas par une majuscule H par exemple
+            Action mauvaisAppel = () => {
+            var ch = new CurrencyHolder("Hdfhstjs",200,0);            
+            };
+            Assert.Throws<ArgumentException>(mauvaisAppel);  
 
+        }
+        [Fact]         
+        public void CantCreateCurrencyHolderWithhThrowExeption()        {
+            //test pour nom de currency ne commencant pas par par une minuscule h par exemple
+            Action mauvaisAppel = () => {
+            var ch = new CurrencyHolder("hfgjgd",200,0);            
+            };
+            Assert.Throws<ArgumentException>(mauvaisAppel);  
+
+        }
+        [Fact]         
+        public void CantCreateCurrencyHolderWith0CapacityThrowExeption()        {
+            //test CurrencyHolder ne peux avoir une capacité inférieure à 1
+            Action mauvaisAppel = () => {
+            var ch = new CurrencyHolder("essai",0,0);            
+            };
+            Assert.Throws<ArgumentException>(mauvaisAppel);  
+
+        }
     }
 }
