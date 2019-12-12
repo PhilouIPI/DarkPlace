@@ -173,5 +173,33 @@ namespace dark_place_game.tests
             Assert.Throws<ArgumentException>(mauvaisAppel);  
 
         }
+
+        [Fact]  
+    public void IsEmptyTrue()        {
+            var ch = new CurrencyHolder("Test",250,0);
+            Assert.True(ch.IsEmpty());
+            }
+             [Fact]  
+    public void IsEmptyFalse()        {
+            var ch = new CurrencyHolder("Test",250,100);
+            Assert.False(ch.IsEmpty());
+            }
+
+            [Fact]  
+    public void IsFullTrueTest()        {
+            var ch = new CurrencyHolder("Test",250,250);
+            Assert.True(ch.IsFull());
+            var sac = new CurrencyHolder("Test",500,500);
+            Assert.True(sac.IsFull());
+            }
+             public void IsFullFalseTest()        {
+            var ch = new CurrencyHolder("Test",250,240);
+            Assert.False(ch.IsFull());
+            var sac = new CurrencyHolder("Test",300,200);
+            Assert.False(sac.IsFull());
+            }
+
+
+        
     }
 }

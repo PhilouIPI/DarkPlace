@@ -48,12 +48,21 @@ Capacity = capacity;
 CurrencyName = name;
 CurrentAmount = amount;
 }
-public bool IsEmpty() {
-return true;
-}
-public bool IsFull() {
-return true;
-}
+
+    public bool IsEmpty() {   
+            if(CurrentAmount == 0){
+                return true;
+            }          
+            return false; 
+        } 
+ 
+        public bool IsFull() {  
+            if(CurrentAmount == Capacity){
+                return true;
+            }    
+
+            return false;         
+        }
 
     public void Store(int amount) {
             var amountCurrent = this.CurrentAmount + amount;
@@ -73,6 +82,8 @@ return true;
             }
             this.CurrentAmount -= amount;
         }
+
+        
 
 
 }
