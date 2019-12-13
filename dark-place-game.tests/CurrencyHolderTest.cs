@@ -175,31 +175,32 @@ namespace dark_place_game.tests
         }
 
         [Fact]  
-    public void IsEmptyTrue()        {
+        public void IsEmptyTrue()        {
+        //test pour la méthode
             var ch = new CurrencyHolder("Test",250,0);
             Assert.True(ch.IsEmpty());
             }
+
              [Fact]  
-    public void IsEmptyFalse()        {
+        public void IsEmptyFalse()        {
             var ch = new CurrencyHolder("Test",250,100);
             Assert.False(ch.IsEmpty());
             }
 
             [Fact]  
-    public void IsFullTrueTest()        {
+        public void IsFullTrueTest()        {
+            //test pour un CurrencyHolder est plein (IsFull) si son contenu est égal à sa capacité 
             var ch = new CurrencyHolder("Test",250,250);
             Assert.True(ch.IsFull());
             var sac = new CurrencyHolder("Test",500,500);
             Assert.True(sac.IsFull());
             }
-             public void IsFullFalseTest()        {
+        public void IsFullFalseTest()        {
             var ch = new CurrencyHolder("Test",250,240);
             Assert.False(ch.IsFull());
             var sac = new CurrencyHolder("Test",300,200);
             Assert.False(sac.IsFull());
             }
-
-
         
     }
 }
